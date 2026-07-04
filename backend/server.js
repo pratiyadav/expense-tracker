@@ -1,6 +1,7 @@
 import dns from "dns";
 dns.setDefaultResultOrder("ipv4first");
 
+import authRoutes from "./routes/authRoutes.js";
 
 import express from "express";
 import dotenv from "dotenv";
@@ -14,6 +15,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use("/api/auth", authRoutes);
 
 app.get("/", (req, res) => {
   res.send("Expense Tracker API is running");
