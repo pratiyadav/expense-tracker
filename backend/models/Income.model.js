@@ -2,9 +2,9 @@ import mongoose from "mongoose";
 
 const IncomeSchema = new mongoose.Schema(
   {
-    UserId: {
+    userId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: true,
+      ref: "User",
       required: true,
     },
     amount: {

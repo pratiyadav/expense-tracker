@@ -3,6 +3,7 @@ dns.setDefaultResultOrder("ipv4first");
 
 import authRoutes from "./routes/authRoutes.js";
 import expenseRoutes from "./routes/expenseRoutes.js";
+import incomeRoutes from "./routes/incomeRoutes.js"
 
 
 import express from "express";
@@ -19,6 +20,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/expenses", expenseRoutes);
+app.use("/api/income", incomeRoutes);
 
 app.get("/", (req, res) => {
   res.send("Expense Tracker API is running");
