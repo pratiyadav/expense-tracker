@@ -1,10 +1,11 @@
 import dns from "dns";
 dns.setDefaultResultOrder("ipv4first");
 
+import cookieParser from "cookie-parser";
 import authRoutes from "./routes/authRoutes.js";
 import expenseRoutes from "./routes/expenseRoutes.js";
-import incomeRoutes from "./routes/incomeRoutes.js"
-
+import incomeRoutes from "./routes/incomeRoutes.js";
+import { errorHandler } from "./middleware/errorMiddleware.js";
 
 import express from "express";
 import dotenv from "dotenv";
@@ -16,11 +17,17 @@ connectDB();
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:5173",
+  credentials: true,
+}));
 app.use(express.json());
+app.use(cookieParser()); // ← added
+
 app.use("/api/auth", authRoutes);
 app.use("/api/expenses", expenseRoutes);
 app.use("/api/income", incomeRoutes);
+app.use(errorHandler);
 
 app.get("/", (req, res) => {
   res.send("Expense Tracker API is running");
