@@ -97,7 +97,7 @@ npm run dev
 
 ### Frontend Setup
 ```bash
-cd frontend/expense-tracker
+cd frontend
 npm install
 npm run dev
 ```
@@ -116,7 +116,6 @@ expense-tracker/
 │   ├── utils/              # asyncHandler, ApiResponse, ApiError
 │   └── server.js
 └── frontend/
-    └── expense-tracker/
         └── src/
             ├── components/
             ├── pages/
