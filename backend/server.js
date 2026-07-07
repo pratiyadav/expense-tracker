@@ -6,7 +6,7 @@ import authRoutes from "./routes/authRoutes.js";
 import expenseRoutes from "./routes/expenseRoutes.js";
 import incomeRoutes from "./routes/incomeRoutes.js";
 import { errorHandler } from "./middleware/errorMiddleware.js";
-
+import analyticsRoutes from "./routes/analyticsRoutes.js";
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
@@ -17,16 +17,19 @@ connectDB();
 
 const app = express();
 
-app.use(cors({
-  origin: "http://localhost:5173",
-  credentials: true,
-}));
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  }),
+);
 app.use(express.json());
-app.use(cookieParser()); // ← added
+app.use(cookieParser()); 
 
 app.use("/api/auth", authRoutes);
 app.use("/api/expenses", expenseRoutes);
 app.use("/api/income", incomeRoutes);
+app.use("/api/analytics", analyticsRoutes);
 app.use(errorHandler);
 
 app.get("/", (req, res) => {
