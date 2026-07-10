@@ -5,26 +5,22 @@ import CategoryBreakdown from "../components/Charts/CategoryBreakdown";
 
 const Home = () => {
   return (
-    <div style={{ padding: "1rem" }}>
+    <div className="page-container">
       <h1>Dashboard</h1>
 
-      <section>
-        <h2>Monthly Spending</h2>
-        <MonthlyTrend />
-      </section>
+      <div className="dashboard-grid">
+        <div className="card">
+          <h2>Monthly Spending</h2>
+          <MonthlyTrend />
+        </div>
+        <div className="card">
+          <h2>Category Breakdown</h2>
+          <CategoryBreakdown />
+        </div>
+      </div>
 
-      <section>
-        <h2>Category Breakdown</h2>
-        <CategoryBreakdown />
-      </section>
-
-      <section>
-        <ExpenseList />
-      </section>
-
-      <section>
-        <IncomeList />
-      </section>
+      <ExpenseList />
+      <IncomeList />
     </div>
   );
 };

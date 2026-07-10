@@ -20,7 +20,6 @@ const ExpenseForm = ({ initialData = {}, onSuccess }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-
     try {
       if (initialData._id) {
         await axiosInstance.put(`/expenses/${initialData._id}`, { amount, category, description, date });
@@ -39,12 +38,14 @@ const ExpenseForm = ({ initialData = {}, onSuccess }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type="number" placeholder="Amount" value={amount} onChange={(e) => setAmount(e.target.value)} required />
-      <input type="text" placeholder="Category" value={category} onChange={(e) => setCategory(e.target.value)} required />
-      <input type="text" placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} />
-      <input type="date" value={date} onChange={(e) => setDate(e.target.value)} required />
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <button type="submit">{initialData._id ? "Update" : "Add"} Expense</button>
+      <div className="form-row">
+        <input type="number" placeholder="Amount" value={amount} onChange={(e) => setAmount(e.target.value)} required />
+        <input type="text" placeholder="Category" value={category} onChange={(e) => setCategory(e.target.value)} required />
+        <input type="text" placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} />
+        <input type="date" value={date} onChange={(e) => setDate(e.target.value)} required />
+        <button type="submit">{initialData._id ? "Update" : "Add"} Expense</button>
+      </div>
+      {error && <p className="error-text">{error}</p>}
     </form>
   );
 };

@@ -13,7 +13,6 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-
     try {
       await register(name, email, password);
       navigate("/");
@@ -23,9 +22,9 @@ const Register = () => {
   };
 
   return (
-    <div>
-      <h2>Register</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="auth-container">
+      <h1>Register</h1>
+      <form onSubmit={handleSubmit} className="auth-form">
         <input
           type="text"
           placeholder="Name"
@@ -47,10 +46,10 @@ const Register = () => {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        {error && <p style={{ color: "red" }}>{error}</p>}
-        <button type="submit">Register</button>
+        {error && <p className="error-text">{error}</p>}
+        <button type="submit" className="btn-full">Register</button>
       </form>
-      <p>
+      <p className="auth-link">
         Already have an account? <Link to="/login">Login</Link>
       </p>
     </div>

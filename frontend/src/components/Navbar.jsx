@@ -13,13 +13,11 @@ const Navbar = () => {
   if (!user) return null;
 
   return (
-    <nav style={{ display: "flex", justifyContent: "space-between", padding: "1rem", borderBottom: "1px solid #ccc" }}>
-      <div>
-        <Link to="/">Dashboard</Link>
-      </div>
-      <div>
+    <nav className="navbar">
+      <Link to="/" className="navbar-brand">FinSight AI</Link>
+      <div className="navbar-user">
         <span>Hi, {user.name}</span>
-        <button onClick={handleLogout} style={{ marginLeft: "1rem" }}>Logout</button>
+        <button className="btn-secondary" onClick={handleLogout}>Logout</button>
       </div>
     </nav>
   );

@@ -12,7 +12,6 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-
     try {
       await login(email, password);
       navigate("/");
@@ -22,9 +21,9 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="auth-container">
+      <h1>Login</h1>
+      <form onSubmit={handleSubmit} className="auth-form">
         <input
           type="email"
           placeholder="Email"
@@ -39,10 +38,10 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        {error && <p style={{ color: "red" }}>{error}</p>}
-        <button type="submit">Login</button>
+        {error && <p className="error-text">{error}</p>}
+        <button type="submit" className="btn-full">Login</button>
       </form>
-      <p>
+      <p className="auth-link">
         Don't have an account? <Link to="/register">Register</Link>
       </p>
     </div>

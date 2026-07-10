@@ -21,7 +21,7 @@ const IncomeList = () => {
   };
 
   return (
-    <div>
+    <div className="card">
       <h3>{editingIncome ? "Edit Income" : "Add Income"}</h3>
       <IncomeForm
         initialData={editingIncome || {}}
@@ -31,13 +31,17 @@ const IncomeList = () => {
         }}
       />
 
-      <h3>Your Income</h3>
-      <ul>
+      <h3 style={{ marginTop: "1.5rem" }}>Your Income</h3>
+      <ul className="entry-list">
         {incomes.map((inc) => (
-          <li key={inc._id}>
-            {inc.source} — ₹{inc.amount} — {new Date(inc.date).toLocaleDateString()}
-            <button onClick={() => setEditingIncome(inc)}>Edit</button>
-            <button onClick={() => handleDelete(inc._id)}>Delete</button>
+          <li key={inc._id} className="entry-item">
+            <span className="entry-details">
+              {inc.source} — <span className="entry-amount">₹{inc.amount}</span> — {new Date(inc.date).toLocaleDateString()}
+            </span>
+            <span className="entry-actions">
+              <button className="btn-secondary" onClick={() => setEditingIncome(inc)}>Edit</button>
+              <button className="btn-danger" onClick={() => handleDelete(inc._id)}>Delete</button>
+            </span>
           </li>
         ))}
       </ul>

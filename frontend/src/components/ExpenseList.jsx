@@ -21,7 +21,7 @@ const ExpenseList = () => {
   };
 
   return (
-    <div>
+    <div className="card">
       <h3>{editingExpense ? "Edit Expense" : "Add Expense"}</h3>
       <ExpenseForm
         initialData={editingExpense || {}}
@@ -31,13 +31,17 @@ const ExpenseList = () => {
         }}
       />
 
-      <h3>Your Expenses</h3>
-      <ul>
+      <h3 style={{ marginTop: "1.5rem" }}>Your Expenses</h3>
+      <ul className="entry-list">
         {expenses.map((exp) => (
-          <li key={exp._id}>
-            {exp.category} — ₹{exp.amount} — {exp.description} — {new Date(exp.date).toLocaleDateString()}
-            <button onClick={() => setEditingExpense(exp)}>Edit</button>
-            <button onClick={() => handleDelete(exp._id)}>Delete</button>
+          <li key={exp._id} className="entry-item">
+            <span className="entry-details">
+              {exp.category} — <span className="entry-amount">₹{exp.amount}</span> — {exp.description} — {new Date(exp.date).toLocaleDateString()}
+            </span>
+            <span className="entry-actions">
+              <button className="btn-secondary" onClick={() => setEditingExpense(exp)}>Edit</button>
+              <button className="btn-danger" onClick={() => handleDelete(exp._id)}>Delete</button>
+            </span>
           </li>
         ))}
       </ul>
