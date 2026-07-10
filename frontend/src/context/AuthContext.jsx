@@ -25,7 +25,17 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    setLoading(false);
+    const checkSession = async () => {
+      try {
+        const response = await axiosInstance.get("/auth/me");
+        setUser(response.data);
+      } catch (error) {
+        setUser(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+    checkSession();
   }, []);
 
   return (

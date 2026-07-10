@@ -15,6 +15,14 @@ const sendTokenCookie = (res, token) => {
   });
 };
 
+export const getMe = async (req, res) => {
+  res.status(200).json({
+    _id: req.user._id,
+    name: req.user.name,
+    email: req.user.email,
+  });
+};
+
 export const registerUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;
