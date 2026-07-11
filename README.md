@@ -121,7 +121,45 @@ expense-tracker/
             ├── pages/
             ├── context/
             └── api/
+
 ```
+
+## Live Demo
+- Frontend: https://spendwise-ai-roan.vercel.app
+- Backend API: https://your-backend-name.onrender.com
+
+## Completed Features
+
+### Authentication
+- Register, login, logout with JWT stored in httpOnly cookies
+- Bcrypt password hashing
+- Forgot password / reset password flow via email (Nodemailer)
+- Profile photo upload (Cloudinary)
+- Persistent login across page refresh
+
+### Expense & Income Management
+- Full CRUD for both, scoped per authenticated user
+- CSV export for both expense and income records
+
+### Analytics
+- Monthly spending trend (area chart)
+- Category breakdown (donut chart)
+- Income vs. expense comparison (bar chart)
+- Income trend and source breakdown
+
+### UI/UX
+- Sidebar navigation with dedicated Dashboard, Income, and Expense pages
+- Dark mode / light mode toggle with persistence
+- Fully responsive layout
+
+### Deployment
+- Backend deployed on Render
+- Frontend deployed on Vercel
+- MongoDB Atlas (cloud-hosted database)
+- Configured for secure cross-origin cookie authentication in production
+
+## Planned (Phase 2)
+- AI-powered receipt scanning via Claude Vision API — upload a photo, auto-extract merchant/amount/category, pre-fill the expense form
 
 ## License
 
