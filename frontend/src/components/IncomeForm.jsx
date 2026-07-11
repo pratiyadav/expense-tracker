@@ -24,9 +24,7 @@ const IncomeForm = ({ initialData = {}, onSuccess }) => {
       } else {
         await axiosInstance.post("/income", { amount, source, date });
       }
-      setAmount("");
-      setSource("");
-      setDate("");
+      setAmount(""); setSource(""); setDate("");
       onSuccess();
     } catch (err) {
       setError(err.response?.data?.message || "Failed to save income");
@@ -34,13 +32,20 @@ const IncomeForm = ({ initialData = {}, onSuccess }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="form-row">
-        <input type="number" placeholder="Amount" value={amount} onChange={(e) => setAmount(e.target.value)} required />
-        <input type="text" placeholder="Source (e.g. Salary)" value={source} onChange={(e) => setSource(e.target.value)} required />
-        <input type="date" value={date} onChange={(e) => setDate(e.target.value)} required />
-        <button type="submit">{initialData._id ? "Update" : "Add"} Income</button>
+    <form onSubmit={handleSubmit} className="entry-form">
+      <div className="field-group">
+        <label>Amount</label>
+        <input type="number" placeholder="0.00" value={amount} onChange={(e) => setAmount(e.target.value)} required />
       </div>
+      <div className="field-group">
+        <label>Source</label>
+        <input type="text" placeholder="Salary, Freelance..." value={source} onChange={(e) => setSource(e.target.value)} required />
+      </div>
+      <div className="field-group">
+        <label>Date</label>
+        <input type="date" value={date} onChange={(e) => setDate(e.target.value)} required />
+      </div>
+      <button type="submit" className="btn-primary">{initialData._id ? "Update" : "Add"} Income</button>
       {error && <p className="error-text">{error}</p>}
     </form>
   );

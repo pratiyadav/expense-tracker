@@ -2,40 +2,36 @@ import { useState, useEffect } from "react";
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from "recharts";
 import axiosInstance from "../../api/axiosInstance";
 
-const MonthlyTrend = () => {
+const IncomeTrend = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axiosInstance.get("/analytics/monthly");
-      const formatted = response.data.data.map((item) => ({
-        month: `${item._id.month}/${item._id.year}`,
-        totalSpent: item.totalSpent,
-      }));
-      setData(formatted);
+      const response = await axiosInstance.get("/analytics/income-monthly");
+      setData(response.data.data.map((item) => ({ month: `${item._id.month}/${item._id.year}`, totalIncome: item.totalIncome })));
     };
     fetchData();
   }, []);
 
-  if (data.length === 0) return <p className="empty-note">No expense data yet.</p>;
+  if (data.length === 0) return <p className="empty-note">No income data yet.</p>;
 
   return (
     <ResponsiveContainer width="100%" height={260}>
       <AreaChart data={data}>
         <defs>
-          <linearGradient id="trendFill" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="var(--color-primary)" stopOpacity={0.35} />
-            <stop offset="100%" stopColor="var(--color-primary)" stopOpacity={0} />
+          <linearGradient id="incomeFill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="var(--color-income)" stopOpacity={0.35} />
+            <stop offset="100%" stopColor="var(--color-income)" stopOpacity={0} />
           </linearGradient>
         </defs>
         <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" vertical={false} />
         <XAxis dataKey="month" stroke="var(--color-ink-light)" fontSize={12} />
         <YAxis stroke="var(--color-ink-light)" fontSize={12} />
         <Tooltip />
-        <Area type="monotone" dataKey="totalSpent" stroke="var(--color-primary)" strokeWidth={2.5} fill="url(#trendFill)" />
+        <Area type="monotone" dataKey="totalIncome" stroke="var(--color-income)" strokeWidth={2.5} fill="url(#incomeFill)" />
       </AreaChart>
     </ResponsiveContainer>
   );
 };
 
-export default MonthlyTrend;
+export default IncomeTrend;

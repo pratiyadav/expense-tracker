@@ -26,10 +26,7 @@ const ExpenseForm = ({ initialData = {}, onSuccess }) => {
       } else {
         await axiosInstance.post("/expenses", { amount, category, description, date });
       }
-      setAmount("");
-      setCategory("");
-      setDescription("");
-      setDate("");
+      setAmount(""); setCategory(""); setDescription(""); setDate("");
       onSuccess();
     } catch (err) {
       setError(err.response?.data?.message || "Failed to save expense");
@@ -37,14 +34,24 @@ const ExpenseForm = ({ initialData = {}, onSuccess }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="form-row">
-        <input type="number" placeholder="Amount" value={amount} onChange={(e) => setAmount(e.target.value)} required />
-        <input type="text" placeholder="Category" value={category} onChange={(e) => setCategory(e.target.value)} required />
-        <input type="text" placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} />
-        <input type="date" value={date} onChange={(e) => setDate(e.target.value)} required />
-        <button type="submit">{initialData._id ? "Update" : "Add"} Expense</button>
+    <form onSubmit={handleSubmit} className="entry-form">
+      <div className="field-group">
+        <label>Amount</label>
+        <input type="number" placeholder="0.00" value={amount} onChange={(e) => setAmount(e.target.value)} required />
       </div>
+      <div className="field-group">
+        <label>Category</label>
+        <input type="text" placeholder="Food, Travel..." value={category} onChange={(e) => setCategory(e.target.value)} required />
+      </div>
+      <div className="field-group">
+        <label>Description</label>
+        <input type="text" placeholder="Optional note" value={description} onChange={(e) => setDescription(e.target.value)} />
+      </div>
+      <div className="field-group">
+        <label>Date</label>
+        <input type="date" value={date} onChange={(e) => setDate(e.target.value)} required />
+      </div>
+      <button type="submit" className="btn-primary">{initialData._id ? "Update" : "Add"} Expense</button>
       {error && <p className="error-text">{error}</p>}
     </form>
   );

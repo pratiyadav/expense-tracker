@@ -24,12 +24,16 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
+  const updateAvatar = (avatarUrl) => {
+    setUser((prev) => ({ ...prev, avatarUrl }));
+  };
+
   useEffect(() => {
     const checkSession = async () => {
       try {
         const response = await axiosInstance.get("/auth/me");
         setUser(response.data);
-      } catch (error) {
+      } catch {
         setUser(null);
       } finally {
         setLoading(false);
@@ -39,7 +43,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, login, register, logout, loading }}>
+    <AuthContext.Provider value={{ user, login, register, logout, updateAvatar, loading }}>
       {children}
     </AuthContext.Provider>
   );
