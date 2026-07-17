@@ -15,7 +15,7 @@ Most expense trackers fail because manual data entry is tedious. This project so
 | Database | MongoDB (Mongoose) |
 | Authentication | JWT stored in httpOnly cookies |
 | Password Security | bcrypt hashing |
-| AI (Stage 2) | Claude Vision API |
+| AI (Stage 2) | Gemini Vision API |
 | File Upload (Stage 2) | Multer + Cloudinary |
 | Deployment | Render/Railway (backend), Vercel (frontend) |
 
@@ -65,7 +65,7 @@ The backend follows a layered structure:
 
 **Stage 2 (AI add-on)**
 - Receipt image upload (Multer + Cloudinary)
-- AI extraction service — sends receipt image to Claude Vision API, receives structured JSON (merchant, amount, category, date)
+- AI extraction service — sends receipt image to Gemini Vision API, receives structured JSON (merchant, amount, category, date)
 - Pre-fills the existing expense form with extracted data for user confirmation
 
 **Deployment**
@@ -159,7 +159,7 @@ expense-tracker/
 - Configured for secure cross-origin cookie authentication in production
 
 ## Planned (Phase 2)
-- AI-powered receipt scanning via Claude Vision API — upload a photo, auto-extract merchant/amount/category, pre-fill the expense form
+- AI-powered receipt scanning via Gemini Vision API — upload a photo, auto-extract merchant/amount/category, pre-fill the expense form
 
 ## License
 
