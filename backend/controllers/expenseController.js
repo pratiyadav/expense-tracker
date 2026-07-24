@@ -4,7 +4,7 @@ import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 
 const addExpense = asyncHandler(async (req, res) => {
-  const { amount, category, description, date } = req.body;
+  const { amount, category, description, date, merchant, receiptImageUrl, source } = req.body;
 
   if (!amount || !category || !date) {
     throw new ApiError(400, "Amount, category, and date are required");
@@ -16,12 +16,17 @@ const addExpense = asyncHandler(async (req, res) => {
     category,
     description,
     date,
+    merchant: merchant || null,
+    receiptImageUrl: receiptImageUrl || null,
+    source: source || "manual",
   });
 
   return res
     .status(201)
     .json(new ApiResponse(201, expense, "Expense added successfully"));
 });
+
+
 
 const getExpense = asyncHandler(async (req, res) => {
   const expenses = await Expense.find({ userId: req.user._id });

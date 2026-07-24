@@ -4,7 +4,7 @@ import ExpenseForm from "./ExpenseForm";
 import DownloadButton from "./DownloadButton";
 import { getCategoryStyle } from "../utils/categoryStyle";
 
-const ExpenseList = () => {
+const ExpenseList = ({ prefillData, onPrefillUsed }) => {
   const [expenses, setExpenses] = useState([]);
   const [editingExpense, setEditingExpense] = useState(null);
 
@@ -20,10 +20,22 @@ const ExpenseList = () => {
     fetchExpenses();
   };
 
+  const formInitialData = editingExpense || prefillData || {};
+
+  const handleFormSuccess = () => {
+    setEditingExpense(null);
+    if (prefillData) onPrefillUsed?.();
+    fetchExpenses();
+  };
+
   return (
     <div className="card">
       <h2>{editingExpense ? "Edit Expense" : "Add Expense"}</h2>
-      <ExpenseForm initialData={editingExpense || {}} onSuccess={() => { setEditingExpense(null); fetchExpenses(); }} />
+      <ExpenseForm
+        key={editingExpense?._id || (prefillData ? "prefill" : "blank")}
+        initialData={formInitialData}
+        onSuccess={handleFormSuccess}
+      />
 
       <div className="list-header">
         <h3 className="section-subtitle" style={{ margin: 0 }}>Your Expenses</h3>
@@ -46,7 +58,10 @@ const ExpenseList = () => {
             <li key={exp._id} className="transaction-row">
               <div className="transaction-icon" style={{ background: style.bg, color: style.color }}>{style.emoji}</div>
               <div className="transaction-info">
-                <span className="transaction-title">{exp.category}</span>
+                <span className="transaction-title">
+                  {exp.category}
+                  {exp.source === "receipt_scan" && <span className="scanned-badge">📷 Scanned</span>}
+                </span>
                 <span className="transaction-date">{exp.description ? `${exp.description} · ` : ""}{new Date(exp.date).toLocaleDateString()}</span>
               </div>
               <span className="pill expense-pill">− ₹{Number(exp.amount).toLocaleString("en-IN")}</span>

@@ -7,6 +7,7 @@ import expenseRoutes from "./routes/expenseRoutes.js";
 import incomeRoutes from "./routes/incomeRoutes.js";
 import analyticsRoutes from "./routes/analyticsRoutes.js";
 import { errorHandler } from "./middleware/errorMiddleware.js";
+import receiptRoutes from "./routes/receiptRoutes.js";
 
 import express from "express";
 import dotenv from "dotenv";
@@ -31,6 +32,8 @@ app.use("/api/auth", authRoutes);
 app.use("/api/expenses", expenseRoutes);
 app.use("/api/income", incomeRoutes);
 app.use("/api/analytics", analyticsRoutes);
+app.use("/api/receipts", receiptRoutes);
+
 
 app.get("/", (req, res) => {
   res.send("Expense Tracker API is running");

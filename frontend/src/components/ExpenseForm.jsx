@@ -9,22 +9,28 @@ const ExpenseForm = ({ initialData = {}, onSuccess }) => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    if (initialData._id) {
-      setAmount(initialData.amount);
-      setCategory(initialData.category);
-      setDescription(initialData.description);
-      setDate(initialData.date?.split("T")[0]);
-    }
+    setAmount(initialData.amount || "");
+    setCategory(initialData.category || "");
+    setDescription(initialData.description || "");
+    setDate(initialData.date?.split?.("T")[0] || initialData.date || "");
   }, [initialData]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+
+    const payload = { amount, category, description, date };
+    if (!initialData._id && initialData.merchant) {
+      payload.merchant = initialData.merchant;
+      payload.receiptImageUrl = initialData.receiptImageUrl;
+      payload.source = initialData.source;
+    }
+
     try {
       if (initialData._id) {
-        await axiosInstance.put(`/expenses/${initialData._id}`, { amount, category, description, date });
+        await axiosInstance.put(`/expenses/${initialData._id}`, payload);
       } else {
-        await axiosInstance.post("/expenses", { amount, category, description, date });
+        await axiosInstance.post("/expenses", payload);
       }
       setAmount(""); setCategory(""); setDescription(""); setDate("");
       onSuccess();
