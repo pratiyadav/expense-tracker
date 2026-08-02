@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext.jsx";
+import loginHero from "../assets/login-hero.jpg";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -22,36 +23,48 @@ const Register = () => {
   };
 
   return (
-    <div className="auth-container">
-      <h1>Register</h1>
-      <form onSubmit={handleSubmit} className="auth-form">
-        <input
-          type="text"
-          placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        {error && <p className="error-text">{error}</p>}
-        <button type="submit" className="btn-full">Register</button>
-      </form>
-      <p className="auth-link">
-        Already have an account? <Link to="/login">Login</Link>
-      </p>
+    <div className="auth-split">
+      <div className="auth-visual">
+        <img src={loginHero} alt="Financial planning" className="auth-visual-img" />
+        <div className="auth-visual-overlay">
+          <h2 className="auth-visual-title">Track every rupee, effortlessly</h2>
+          <p className="auth-visual-subtitle">
+            Snap a photo of your receipt and let AI handle the rest.
+          </p>
+        </div>
+      </div>
+
+      <div className="auth-form-side">
+        <div className="auth-container">
+          <h1>Register</h1>
+          <form onSubmit={handleSubmit} className="auth-form">
+            <input
+              type="text"
+              placeholder="Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            {error && <p className="error-text">{error}</p>}
+            <button type="submit" className="btn-primary btn-full">Register</button>
+          </form>
+          <p className="auth-link">Already have an account? <Link to="/login">Login</Link></p>
+        </div>
+      </div>
     </div>
   );
 };

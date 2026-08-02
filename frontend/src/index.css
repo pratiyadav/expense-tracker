@@ -421,3 +421,67 @@ button {
   font-weight: 700;
   color: var(--color-primary);
 }
+
+.auth-split {
+  display: flex;
+  min-height: 100vh;
+}
+
+.auth-visual {
+  position: relative;
+  flex: 1.1;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+
+.auth-visual-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.auth-visual-overlay {
+  position: relative;
+  z-index: 1;
+  padding: 3rem 2.5rem;
+  width: 100%;
+  background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.15) 60%, transparent 100%);
+}
+
+.auth-visual-title {
+  color: white;
+  font-size: 1.7rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+.auth-visual-subtitle {
+  color: rgba(255,255,255,0.85);
+  font-size: 0.95rem;
+  max-width: 320px;
+}
+
+.auth-form-side {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg);
+  padding: 2rem;
+}
+
+.auth-form-side .auth-container {
+  margin: 0;
+  box-shadow: none;
+  border: none;
+  width: 100%;
+  max-width: 380px;
+}
+
+@media (max-width: 768px) {
+  .auth-visual { display: none; }
+  .auth-form-side { flex: 1; }
+}
