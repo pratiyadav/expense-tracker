@@ -8,10 +8,7 @@ A full-stack web application for tracking personal income and expenses, built ar
 
 ## Overview
 
-Most expense trackers fail because manual data entry is tedious. This project tackles that in two stages:
-
-1. A complete core tracker — authentication, expense/income CRUD, and analytics dashboards.
-2. An AI extraction feature that reads a photo of a receipt and auto-fills the expense form, reducing manual entry to a quick confirmation step.
+Most expense trackers fail because manual data entry is tedious. This project solves that with a complete core tracker — authentication, expense/income CRUD, and analytics dashboards — plus an AI-powered receipt-scanning feature that reads a photo of a receipt and auto-fills the expense form, reducing manual entry to a quick confirmation step.
 
 ## Tech Stack
 
@@ -23,6 +20,7 @@ Most expense trackers fail because manual data entry is tedious. This project ta
 | Authentication     | JWT stored in httpOnly cookies                 |
 | Password Security  | bcrypt hashing                                 |
 | File Upload        | Multer + Cloudinary                            |
+| AI                 | Google Gemini API (receipt scanning)           |
 | Deployment         | Render (backend), Vercel (frontend), MongoDB Atlas (database) |
 
 ## Architecture
@@ -70,11 +68,11 @@ The backend follows a layered structure:
 ### Centralized Error Handling
 - Custom `ApiError` class and Express error middleware ensure every error returns a consistent JSON shape: `{ success, message, statusCode }`
 
-### Planned (Phase 2) — AI Receipt Scanning
+### AI Receipt Scanning
 - Receipt image upload (Multer + Cloudinary)
-- AI extraction service that sends the receipt image to a vision model and receives structured JSON (merchant, amount, category, date)
-- Pre-fills the existing expense form with extracted data for user confirmation
-- Expense schema already includes fields for this: `source` (manual vs. receipt_scan), `receiptImageUrl`, `merchant`
+- AI extraction service sends the receipt image to the Google Gemini API and receives structured JSON (merchant, amount, category, date)
+- Pre-fills the expense form with the extracted data for user confirmation
+- Expense schema includes supporting fields: `source` (manual vs. receipt_scan), `receiptImageUrl`, `merchant`
 
 ## Project Structure
 
@@ -86,7 +84,7 @@ expense-tracker/
 │   ├── middleware/       # Auth + error handling
 │   ├── models/            # Mongoose schemas
 │   ├── routes/            # API endpoints
-│   ├── services/          # AI extraction service (Phase 2)
+│   ├── services/          # Gemini AI extraction service
 │   ├── utils/              # asyncHandler, ApiResponse, ApiError
 │   └── server.js
 └── frontend/
