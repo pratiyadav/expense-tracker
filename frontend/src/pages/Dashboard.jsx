@@ -5,16 +5,17 @@ import CategoryBreakdown from "../components/Charts/CategoryBreakdown";
 
 const Dashboard = () => {
   const [totals, setTotals] = useState({ income: 0, expense: 0 });
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchTotals = async () => {
-      const [expenseRes, incomeRes] = await Promise.all([
-        axiosInstance.get("/expenses"),
-        axiosInstance.get("/income"),
-      ]);
-      const totalExpense = expenseRes.data.data.reduce((sum, e) => sum + Number(e.amount), 0);
-      const totalIncome = incomeRes.data.data.reduce((sum, i) => sum + Number(i.amount), 0);
-      setTotals({ income: totalIncome, expense: totalExpense });
+      try {
+        // Totals are summed in MongoDB, so the browser no longer downloads every record
+        const response = await axiosInstance.get("/analytics/totals");
+        setTotals(response.data.data);
+      } catch (err) {
+        setError(err.response?.data?.message || "Could not load your totals");
+      }
     };
     fetchTotals();
   }, []);
@@ -25,6 +26,7 @@ const Dashboard = () => {
   return (
     <div className="page-container">
       <h1>Dashboard</h1>
+      {error && <p className="error-text">{error}</p>}
 
       <div className="stat-row">
         <div className="stat-card">

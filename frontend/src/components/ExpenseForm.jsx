@@ -20,7 +20,7 @@ const ExpenseForm = ({ initialData = {}, onSuccess }) => {
     setError("");
 
     const payload = { amount, category, description, date };
-    if (!initialData._id && initialData.merchant) {
+    if (!initialData._id && initialData.source === "receipt_scan") {
       payload.merchant = initialData.merchant;
       payload.receiptImageUrl = initialData.receiptImageUrl;
       payload.source = initialData.source;
@@ -43,7 +43,7 @@ const ExpenseForm = ({ initialData = {}, onSuccess }) => {
     <form onSubmit={handleSubmit} className="entry-form">
       <div className="field-group">
         <label>Amount</label>
-        <input type="number" placeholder="0.00" value={amount} onChange={(e) => setAmount(e.target.value)} required />
+        <input type="number" min="0.01" step="0.01" placeholder="0.00" value={amount} onChange={(e) => setAmount(e.target.value)} required />
       </div>
       <div className="field-group">
         <label>Category</label>

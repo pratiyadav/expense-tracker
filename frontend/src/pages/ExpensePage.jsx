@@ -19,10 +19,10 @@ const ExpensePage = () => {
 
   const prefillData = scanResult
     ? {
-        amount: scanResult.amount,
+        amount: scanResult.amount ?? "",
         category: selectedCategory,
-        description: scanResult.merchant,
-        date: scanResult.date,
+        description: scanResult.merchant ?? "",
+        date: scanResult.date ?? "",
         merchant: scanResult.merchant,
         receiptImageUrl: scanResult.receiptImageUrl,
         source: "receipt_scan",
@@ -40,7 +40,7 @@ const ExpensePage = () => {
 
         {scanResult && (
           <div className="scan-review">
-            <p className="scan-merchant">{scanResult.merchant} — ₹{scanResult.amount}</p>
+            <p className="scan-merchant">{scanResult.merchant ?? "Unknown merchant"} — ₹{scanResult.amount ?? "?"}</p>
             <p className="scan-label">Choose a category:</p>
             <div className="scan-category-options">
               {scanResult.category_suggestions?.map((s) => (
