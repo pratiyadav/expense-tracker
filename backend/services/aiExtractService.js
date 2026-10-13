@@ -3,7 +3,7 @@ import { ApiError } from "../utils/ApiError.js";
 
 // Pin a model through GEMINI_MODEL if you need stable behaviour; "-latest"
 // aliases can start pointing at a different model without any code change.
-const MODEL = process.env.GEMINI_MODEL || "gemini-flash-latest";
+const MODEL = process.env.GEMINI_MODEL || "gemini-3.5-flash-lite";
 const TIMEOUT_MS = 25000;
 
 // Created on first use, so it never depends on when dotenv was loaded.

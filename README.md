@@ -1,4 +1,4 @@
-# FinSight AI (Expense Tracker)
+# Spendwise AI (Expense Tracker)
 
 Most expense trackers fail because manual data entry is tedious. This project solves that with a complete core tracker (authentication, expense/income CRUD, analytics dashboards) plus an AI-powered receipt-scanning feature that reads a photo of a receipt and pre-fills the expense form, reducing manual entry to a quick confirmation step.
 
