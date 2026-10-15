@@ -3,37 +3,11 @@ import { ApiError } from "../utils/ApiError.js";
 const errorHandler = (err, req, res, next) => {
   let error = err;
 
-  // If it's not already an ApiError, translate known error types, then wrap it
+  // If it's not already an ApiError, wrap it into one
+
   if (!(error instanceof ApiError)) {
-    let statusCode = error.statusCode || error.status || 500;
-    let message = error.message || "Something went wrong";
-
-    if (error.name === "ValidationError" && error.errors) {
-      statusCode = 400;
-      message = Object.values(error.errors)
-        .map((e) => e.message)
-        .join(", ");
-    } else if (error.name === "CastError") {
-      statusCode = 400;
-      message = `Invalid ${error.path}`;
-    } else if (error.code === 11000) {
-      statusCode = 409;
-      message = "That record already exists";
-    } else if (error.name === "MulterError") {
-      statusCode = 400;
-      message =
-        error.code === "LIMIT_FILE_SIZE"
-          ? "Image is too large (max 5 MB)"
-          : error.message;
-    }
-
-    if (statusCode >= 500) {
-      console.error(err);
-      if (process.env.NODE_ENV === "production") {
-        message = "Internal server error"; // never leak internals in production
-      }
-    }
-
+    const statusCode = error.statusCode || 500;
+    const message = error.message || "Something went wrong";
     error = new ApiError(statusCode, message, error?.errors || [], err.stack);
   }
 

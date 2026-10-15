@@ -1,16 +1,13 @@
-// Spreadsheet apps run cells that start with = + - @ as formulas. Prefix such
-// text with a quote so a description like =HYPERLINK(...) stays plain text.
-const csvCell = (value) => {
-  let text = String(value ?? "");
-  if (typeof value === "string" && /^[=+\-@\t\r]/.test(text)) {
-    text = `'${text}`;
-  }
-  return `"${text.replace(/"/g, '""')}"`;
+const safe = (value) => {
+  const text = String(value ?? "");
+  return /^[=+\-@]/.test(text) ? `'${text}` : text;
 };
 
 const toCSV = (rows, columns) => {
   const header = columns.map((c) => c.label).join(",");
-  const lines = rows.map((row) => columns.map((c) => csvCell(row[c.key])).join(","));
+  const lines = rows.map((row) =>
+    columns.map((c) => `"${safe(row[c.key]).replace(/"/g, '""')}"`).join(",")
+  );
   return [header, ...lines].join("\n");
 };
 

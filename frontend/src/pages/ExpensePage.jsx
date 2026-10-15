@@ -40,7 +40,7 @@ const ExpensePage = () => {
 
         {scanResult && (
           <div className="scan-review">
-            <p className="scan-merchant">{scanResult.merchant ?? "Unknown merchant"} — ₹{scanResult.amount ?? "?"}</p>
+            <p className="scan-merchant">{scanResult.merchant ?? "Merchant not found"} — {scanResult.amount ? `₹${scanResult.amount}` : "Amount not found"}</p>
             <p className="scan-label">Choose a category:</p>
             <div className="scan-category-options">
               {scanResult.category_suggestions?.map((s) => (
