@@ -1,12 +1,16 @@
-# SpendWise AI — AI-Powered Personal Finance Management
+# SpendWise AI
 
-![React](https://img.shields.io/badge/React-Frontend-61DAFB?logo=react)
-![Node.js](https://img.shields.io/badge/Node.js-Backend-339933?logo=node.js)
-![Express](https://img.shields.io/badge/Express.js-REST_API-000000?logo=express)
-![MongoDB](https://img.shields.io/badge/MongoDB-Database-47A248?logo=mongodb)
-![Gemini](https://img.shields.io/badge/Gemini-AI_Integration-4285F4?logo=google)
-![Vercel](https://img.shields.io/badge/Vercel-Frontend_Deployment-000000?logo=vercel)
-![Render](https://img.shields.io/badge/Render-Backend_Deployment-46E3B7?logo=render)
+### AI-Powered Personal Finance Management
+
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![Express.js](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
+![Gemini](https://img.shields.io/badge/Gemini_AI-4285F4?style=for-the-badge&logo=googlegemini&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
+![Render](https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=black)
+
+
 
 ## Overview
 
